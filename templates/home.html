@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c, #ffa37a);
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+        header {
+            background: #ff4664;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid #ff7eb3;
+            position: relative;
+            z-index: 2;
+        }
+        header::before, header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            z-index: -1;
+        }
+        header::before {
+            left: -40px;
+        }
+        header::after {
+            right: -40px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        a {
+            display: inline-block;
+            margin: 20px auto;
+            text-decoration: none;
+            color: white;
+            background-color: #ff6088;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        a:hover {
+            background-color: #ff3461;
+            transform: scale(1.05);
+        }
+        ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+            position: relative;
+        }
+        li {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        li h2 {
+            color: #333;
+            margin: 0;
+            font-size: 1.5em;
+        }
+        li p {
+            margin: 10px 0;
+            color: #555;
+        }
+        li img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        li::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 224, 229, 0.5);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+        .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 140px solid rgba(255, 255, 255, 0.3);
+            top: 50px;
+            right: 50px;
+            z-index: -2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Marketplace</h1>
+    </header>
+    <div style="text-align: center;">
+        <a href="{{ url_for('add_item') }}">Add New Item</a>
+    </div>
+    <div class="triangle"></div>
+    <ul>
+        {% for item in items %}
+        <li>
+            <h2>{{ item.name }}</h2>
+            <p><strong>Description:</strong> {{ item.description }}</p>
+            <p><strong>Price:</strong> ${{ item.price }}</p>
+            <p><strong>Contact:</strong> {{ item.contact }}</p>
+            {% if item.image %}
+                <img src="{{ url_for('static', filename=item.image.split('static/')[1]) }}" alt="{{ item.name }}">
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
