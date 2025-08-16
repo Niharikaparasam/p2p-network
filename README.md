@@ -8,7 +8,7 @@ Features
 Tech Stack
 Backend: Flask (Python) – Handles product submissions and page rendering.
 Frontend: HTML, CSS (Jinja Templates) – Displays product listings.
-Database: CSV/SQLite (if applicable) – Stores product details.
+Database: CSV/SQLite – Stores product details.
 File Handling: Flask uploads and serves images correctly.
 
 How It Works
